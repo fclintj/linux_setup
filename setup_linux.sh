@@ -3,6 +3,11 @@
 ##    vim setup   ##
 ####################
 
+# ensure propper installed packages
+sudo apt install vim
+sudo apt install tmux
+
+
 # check to see if vim folder exists
 mkdir ~/.vim  
 
@@ -11,7 +16,7 @@ mv ~/.vimrc ~/.vimrc_old
 
 # move new vim files to home 
 mv vim/.vimrc ~/
-mv vim/ ~/.vim/
+mv vim/* ~/.vim/
 
 ####################
 ##    tmux setup  ##
