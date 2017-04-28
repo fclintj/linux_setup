@@ -27,4 +27,4 @@ augroup END
 set mouse=
 
 "" run program automatically from terminal 
-noremap <F10> :w<CR> :silent !clear; make<CR> :!echo "--------------- Running ---------------"; "./%"<CR>
+noremap <F10> :w<CR> :silent !clear; make<CR> :!echo "-------- Running --------"; "./%<"<CR>
