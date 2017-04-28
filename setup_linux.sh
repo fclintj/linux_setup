@@ -27,3 +27,4 @@ mv ~/.tmux.conf ~/.tmux.conf_old
 
 # move new tmux.conf file to home
 mv tmux/.tmux.conf ~/.tmux.conf
+mv tmux/.tmux ~/
