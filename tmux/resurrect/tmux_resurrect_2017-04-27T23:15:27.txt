@@ -1,0 +1,17 @@
+pane	1	0	:bash	1	:*	0	:/home/clint/dev/scripts	1	bash	:
+pane	Prog	0	:Prog	1	:*	0	:/home/clint/dev/sand_box	1	vim	:vim test.cpp
+pane	Prog	0	:Prog	1	:*	1	:/home/clint	0	vim	:vim .vimrc
+pane	Prog	1	:GDB	0	:-	0	:/home/clint/dev/sand_box	1	vim	:vim test.cpp
+pane	Prog	1	:GDB	0	:-	1	:/home/clint	0	bash	:
+pane	Prog	1	:GDB	0	:-	2	:/home/clint	0	bash	:
+pane	Programming	0	:IDE	1	:*	0	:/home/clint	0	bash	:
+pane	Programming	0	:IDE	1	:*	1	:/home/clint	1	bash	:
+pane	Programming	0	:IDE	1	:*	2	:/home/clint	0	bash	:
+pane	Programming	0	:IDE	1	:*	3	:/home/clint	0	bash	:
+pane	Programming	1	:Nav	0	:-	0	:/home/clint	1	bash	:
+window	1	0	1	:*	bfc2,158x63,0,0,5
+window	Prog	0	1	:*	7436,168x48,0,0{111x48,0,0,1,56x48,112,0,2}
+window	Prog	1	0	:-	57d5,168x48,0,0{114x48,0,0[114x39,0,0,12,114x8,0,40,14],53x48,115,0,13}
+window	Programming	0	1	:*	4684,158x63,0,0{116x63,0,0[116x40,0,0,6,116x22,0,41,7],41x63,117,0[41x29,117,0,8,41x33,117,30,9]}
+window	Programming	1	0	:-	600f,158x63,0,0,10
+state	Prog	

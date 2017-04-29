@@ -1,0 +1,9 @@
+pane	Prog	0	:Prog	1	:*	0	:/home/clint/dev/sand_box	1	vim	:vim test.cpp
+pane	Prog	0	:Prog	1	:*	1	:/home/clint	0	vim	:vim .vimrc
+pane	Prog	1	:GDB	0	:-	0	:/home/clint/dev/sand_box	1	bash	:
+pane	Prog	1	:GDB	0	:-	1	:/home/clint	0	bash	:
+pane	Prog	1	:GDB	0	:-	2	:/home/clint/dev/sand_box	0	bash	:
+pane	Prog	1	:GDB	0	:-	3	:/home/clint	0	bash	:
+window	Prog	0	1	:*	5ebc,168x46,0,0{101x46,0,0,1,66x46,102,0,2}
+window	Prog	1	0	:-	a8dc,168x46,0,0{124x46,0,0[124x40,0,0,12,124x5,0,41,14],43x46,125,0[43x22,125,0,13,43x23,125,23,24]}
+state	Prog	

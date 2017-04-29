@@ -1,0 +1,4 @@
+pane	0	0	:bash	1	:*	0	:/home/clint	0	bash	:
+pane	0	0	:bash	1	:*	1	:/home/clint	1	bash	:
+window	0	0	1	:*	13a0,208x67,0,0{104x67,0,0,0,103x67,105,0,1}
+state	0	
