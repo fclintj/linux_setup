@@ -40,4 +40,4 @@ let g:ConqueTerm_Color = 0
 let g:ConqueTerm_CloseOnEnd = 1
 let g:ConqueTerm_Interrupt = '<C-g><C-c>'
 let g:ConqueTerm_ReadUnfocused = 1
-noremap <F9> :w<CR> :make<CR>:ConqueGdb <CR> 
+noremap <F9> :w<CR> :make<CR>:ConqueGdb  "%<"<CR> 
