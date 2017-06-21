@@ -15,10 +15,10 @@ check_install build-essential
 # copy files and create backup if necessary
 echo Backup files created:
 cp_backup config/.vimrc ~/
-cp_backup config/.tmux.conf ~/
-cp_backup config/.bashrc ~/
-cp_backup .tmux ~/
-cp_backup .vim ~/
+# cp_backup config/.tmux.conf ~/
+# cp_backup config/.bashrc ~/
+# cp_backup .tmux ~/
+# cp_backup .vim ~/
 
 echo
 echo Files successfully copied and nececssary packages verified.
