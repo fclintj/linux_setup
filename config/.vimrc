@@ -8,6 +8,8 @@
     :set shiftwidth=4   " num of spaces for indentation
     :set expandtab      " insert spaces instead of tab
     :set linebreak      " wrap full words to next line
+     set breakindent    " indent wrapped line
+     set showbreak=...  " adds "..." at wrapped line
     :set noruler        " set row and col number at bottom
      set undofile       " maintain undo history between sessions
      set undodir=~/.vim/undodir
@@ -81,13 +83,13 @@
     let g:ConqueTerm_Interrupt = '<C-g><C-c>'
     let g:ConqueTerm_ReadUnfocused = 1
 
-    "" make program from terminal 
-    noremap <F9> :w<CR> :!clear;bash ~/.vim/cpMakefile.sh %;echo -n >params<CR>:!make<CR>
-    inoremap <F9> <ESC> :w<CR> :!clear;bash ~/.vim/cpMakefile.sh %;echo -n >params<CR>:!make<CR>
+    "" make program from terminal―to add blank "params" file, add "echo -n >params" to file
+    noremap <F9> :w<CR> :!clear;bash ~/.vim/cpMakefile.sh %<CR>:!make<CR>
+    inoremap <F9> <ESC> :w<CR> :!clear;bash ~/.vim/cpMakefile.sh %<CR>:!make<CR>
 
     "" run program automatically from terminal 
-    noremap <F10> :w<CR>:silent !clear;make<CR>:!echo "-------- Running --------";for i in $(<params); do output+=" $i"; done;./%< $output<CR>
-    inoremap <F10> <ESC> :w<CR>:silent !clear;make<CR>:!echo "-------- Running --------";for i in $(<params); do output+=" $i"; done;"./%< $output"<CR>
+    noremap <F10> :w<CR>:silent !clear;make<CR>:!echo "-------- Running --------";for i in $(<params); do output+=" $i"; done 2>/dev/null;./%< $output<CR>
+    inoremap <F10> <ESC> :w<CR>:silent !clear;make<CR>:!echo "-------- Running --------";for i in $(<params); do output+=" $i"; done 2>/dev/null;"./%< $output"<CR>
 
     "" run program automatically from terminal 
     noremap  <F12> :w<CR>:!clear;echo "-------- Running --------";for i in $(<params); do output+=" $i"; done;./% $output<CR>

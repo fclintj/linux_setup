@@ -11,32 +11,22 @@ main(){
 check_install vim
 check_install tmux
 check_install build-essential
-check_install lynx
 
-
-# copy 
+# copy files and create backup if necessary
+echo Backup files created:
 cp_backup config/.vimrc ~/
 cp_backup config/.tmux.conf ~/
 cp_backup config/.bashrc ~/
+cp_backup .tmux ~/
+cp_backup .vim ~/
 
+echo
+echo Files successfully copied and nececssary packages verified.
 
-# move new vim files to home 
-# mv vim/.vimrc ~/
-# mv vim/* ~/.vim/
-
-# ####################
-# ##    tux setup  ##
-# ####################
-
-# # check if tmux conf file exists
-# mv ~/.tmux.conf ~/.tmux.conf_old
-
-# # move new tmux.conf file to home
-# mv tmux/.tmux.conf ~/.tmux.conf
-# mkdir ~/.tmux
-# mv tmux/* ~/.tmux
+exit 0
 
 }
+
 function check_install() {
     typeset ans
     if (($(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed")==0))
@@ -79,12 +69,17 @@ function cp_backup() {
         # do not write over oldest version
         typeset past_version=$new_location$(basename $file)"_"$(date_tag)
         if [[ $(find $new_location -maxdepth 1 \
-                -iname $past_version 2>/dev/null) ]]
-        then :
+            -iname $(basename $past_version) 2>/dev/null) ]]
+        then 
+            # add hr, min, sec stamp if necessary
+            typeset path=${new_location}/$(basename $file) 
+            mv $path $past_version-$(date +"%H%M%S")
+            echo $past_version-$(date +"%H%M%S")
         else 
             # make a backup of the old version 
             typeset path=${new_location}/$(basename $file) 
             mv $path $past_version
+            echo $past_version
         fi
     fi
     # copy file to desired location

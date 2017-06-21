@@ -136,51 +136,121 @@ alias cdJournal="cd ~/Google\ Drive/Journaling/vim_journal"
 # ┌────────────────────────┐
 # │  Formatting Functions  │
 # └────────────────────────┘
-    function print_title() {
-        typeset spaces
-        typeset i=0 
-        typeset j=0
-        
-        if (("$#" < 1 )); 
-        then 
-            echo $(red_bold Error:) Argument required
-            return 1
-        fi
+function print_title() {
+    typeset spaces
+    typeset i=0 
+    typeset j=0
+    
+    if (("$#" < 1 )); 
+    then 
+        echo $(red_bold Error:) Argument required
+        return 1
+    fi
 
-        echo -e ┌───────────────────────────────┐
-        for i in "$@"
-        do
-            echo -en │ $i
-            ((spaces=30-${#i}))
+    echo -e ┌───────────────────────────────┐
+    for i in "$@"
+    do
+        echo -en │ $i
+        ((spaces=30-${#i}))
 
-            for j in `seq 1 $spaces` 
-            do 
-                echo -en " "
-            done
-            echo -e │    
+        for j in `seq 1 $spaces` 
+        do 
+            echo -en " "
         done
-        echo -e └───────────────────────────────┘
-    }
-    # Ex: echo "This is a $(underline test)"
-    function bold() {
-        echo -e "\e[1m$1\e[0m"
-    }
+        echo -e │    
+    done
+    echo -e └───────────────────────────────┘
+}
+# Ex: echo "This is a $(underline test)"
+function bold() {
+    echo -e "\e[1m$1\e[0m"
+}
 
-    function red() {
-        echo -e "\e[31m$1\e[0m"
-    }
+function red() {
+    echo -e "\e[31m$1\e[0m"
+}
 
-    function italics() {
-        echo -e "\e[3m$1\e[0m"
-    }
+function italics() {
+    echo -e "\e[3m$1\e[0m"
+}
 
-    function underline() {
-        echo -e "\e[4m$1\e[0m"
-    }
+function underline() {
+    echo -e "\e[4m$1\e[0m"
+}
 
-    function red_bold() {
-        echo -e "\e[1m$(echo -e "\e[31m$1\e[0m")\e[0m"
-    }
+function red_bold() {
+    echo -e "\e[1m$(echo -e "\e[31m$1\e[0m")\e[0m"
+}
+
+# ┌────────────────────────┐
+# │    Program Functions   │
+# └────────────────────────┘
+
+function check_install() {
+    typeset ans
+    if (($(dpkg-query -W -f='${Status}' $1 2>/dev/null | grep -c "ok installed")==0))
+    then 
+        echo "The program "$1" is not installed. Would you like to install it? (Y/n)"
+        if [[ $(validate_Y_n) ]]
+        then
+            sudo apt install $1
+        else
+            echo $1 must be intalled for proper functionality 
+        fi
+    fi
+}
+
+function validate_Y_n() {
+    typeset ans
+    typeset valid=0
+    while (( $valid==0 ))       
+    do
+        read ans
+        case $ans in            
+        yes|Yes|Y|y|"" ) echo TRUE 
+                         valid=1 ;; 
+                      
+        [nN][oO]|n|N   ) 
+                         valid=1 ;;
+                      
+         *             ) echo "Answer (Y/n)" ;;     
+        esac                    
+    done
+}
+
+function cp_backup() {
+    typeset file=$1
+    typeset new_location=$2
+    # check if duplicate file
+    if [[ $(find $new_location -maxdepth 1 \
+        -iname $(basename $file) 2>/dev/null) ]]
+    then
+        # do not write over oldest version
+        typeset past_version=$new_location$(basename $file)"_"$(date_tag)
+        if [[ $(find $new_location -maxdepth 1 \
+            -iname $(basename $past_version) 2>/dev/null) ]]
+        then 
+            # add hr, min, sec stamp if necessary
+            typeset path=${new_location}/$(basename $file) 
+            mv $path $past_version-$(date +"%H%M%S")
+            echo $past_version-$(date +"%H%M%S")
+        else 
+            # make a backup of the old version 
+            typeset path=${new_location}/$(basename $file) 
+            mv $path $past_version
+            echo $past_version
+        fi
+    fi
+    # copy file to desired location
+    cp -r $file $new_location
+}
+
+function date_tag() {
+    typeset DAY=$(date -d "$D" '+%d')
+    typeset MONTH=$(date -d "$D" '+%m')
+    typeset YEAR=$(date -d "$D" '+%y') 
+    echo $YEAR$MONTH$DAY
+}
 
 # ┌────────────────────────┐
 # │  General Instructions  │
