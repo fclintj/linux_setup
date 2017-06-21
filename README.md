@@ -1,2 +1,3 @@
 # linux_setup
-run the script ./vim_tmux_environment
+run the script ./setup.sh
+
