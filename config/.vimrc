@@ -2,18 +2,18 @@
 "" │    vimrc setup    │
 "" └───────────────────┘
 
-    :set nu             " set numbers
-    :set wrapmargin=0   " set width of number margins
-    :set tabstop=4      " set characters in tab
-    :set shiftwidth=4   " num of spaces for indentation
-    :set expandtab      " insert spaces instead of tab
-    :set linebreak      " wrap full words to next line
-     set breakindent    " indent wrapped line
-     set showbreak=...  " adds "..." at wrapped line
-    :set noruler        " set row and col number at bottom
-     set undofile       " maintain undo history between sessions
-     set undodir=~/.vim/undodir
-     set foldmethod=indent 
+    set nu             " set numbers
+    set wrapmargin=0   " set width of number margins
+    set tabstop=4      " set characters in tab
+    set shiftwidth=4   " num of spaces for indentation
+    set expandtab      " insert spaces instead of tab
+    set linebreak      " wrap full words to next line
+    set breakindent    " indent wrapped line
+    set showbreak=...  " adds "..." at wrapped line
+    set noruler        " set row and col number at bottom
+    set undofile       " maintain undo history between sessions
+    set undodir=~/.vim/undodir
+    set foldmethod=indent 
      "":set mouse=a
 
 
@@ -55,6 +55,7 @@
     set completeopt-=preview        " turn off [preview] for ycm
     let g:ycm_always_populate_location_list = 1 " filter through errors
     noremap <c-n> :lne <CR>
+    autocmd FileType c,cpp,java setlocal commentstring=//\ %s " set comment as // for c and cpp
 
 "" ┌────────────────────┐
 "" │ search/replace all │
@@ -88,12 +89,8 @@
     inoremap <F9> <ESC> :w<CR> :!clear;bash ~/.vim/cpMakefile.sh %<CR>:!make<CR>
 
     "" run program automatically from terminal 
-    noremap <F10> :w<CR>:silent !clear;make<CR>:!echo "-------- Running --------";for i in $(<params); do output+=" $i"; done 2>/dev/null;./%< $output<CR>
-    inoremap <F10> <ESC> :w<CR>:silent !clear;make<CR>:!echo "-------- Running --------";for i in $(<params); do output+=" $i"; done 2>/dev/null;"./%< $output"<CR>
-
-    "" run program automatically from terminal 
-    noremap  <F12> :w<CR>:!clear;echo "-------- Running --------";for i in $(<params); do output+=" $i"; done;./% $output<CR>
-    inoremap <F12> <ESC>:w<CR>:!clear;echo "-------- Running --------";for i in $(<params); do output+=" $i"; done;./% $output<CR>
+    noremap <F10> :w<CR>:silent !clear<CR>:!~/.vim/run_prog.sh %<CR>
+    inoremap <F10> <ESC> :w<CR>:silent !clear<CR>:!~/.vim/run_prog.sh %<CR>
 
 "" ┌───────────────────┐
 "" │ general commands  │
@@ -102,3 +99,4 @@
 map tw vipgqvipgc
 "" join broken line with comments into single paragraph
 map tj vipgcvipJvipgc
+
