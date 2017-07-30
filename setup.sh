@@ -12,9 +12,9 @@ handleopts "$@"
 # check if proper packages are installed 
 check_install vim
 check_install tmux
+check_install exuberant-ctags
 
-# ctags
-sudo apt-get install exuberant-ctags
+# YCM
 sudo apt-get install build-essential cmake
 
 # copy files and create backup if necessary
@@ -26,7 +26,7 @@ cp_backup .tmux ~/
 cp_backup .vim ~/
 
 cd ~/.vim/bundle/YouCompleteMe
-python install.py --clang-completer
+# python install.py --clang-completer
 
 echo
 echo Files successfully copied and nececssary packages verified.
