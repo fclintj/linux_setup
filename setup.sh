@@ -12,7 +12,10 @@ handleopts "$@"
 # check if proper packages are installed 
 check_install vim
 check_install tmux
-check_install build-essential
+
+# ctags
+sudo apt-get install exuberant-ctags
+sudo apt-get install build-essential cmake
 
 # copy files and create backup if necessary
 echo Backup files created:
@@ -22,16 +25,11 @@ cp_backup config/.bashrc ~/
 cp_backup .tmux ~/
 cp_backup .vim ~/
 
+cd ~/.vim/bundle/YouCompleteMe
+python install.py --clang-completer
+
 echo
 echo Files successfully copied and nececssary packages verified.
-
-if ((open_vim==1)); then
-    vim $open_new_file_name
-fi
-
-if ((no_backup==1)); then
-    echo A backup was created\; it is bad practice not to make a backup.
-fi
 
 exit 0
 }
